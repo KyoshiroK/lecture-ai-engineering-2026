@@ -1,0 +1,122 @@
+[
+  {
+    "id": "E1",
+    "category": "exact",
+    "term": "LoRA",
+    "question": "LoRAとは何ですか？",
+    "search_found": true,
+    "search_result": "LoRA: 事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。本講座の第2回演習ではLoRAを扱う。"
+  },
+  {
+    "id": "E2",
+    "category": "exact",
+    "term": "QLoRA",
+    "question": "QLoRAとは何ですか？",
+    "search_found": true,
+    "search_result": "LoRA: 事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。本講座の第2回演習ではLoRAを扱う。\nQLoRA: ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。本講座の第2回演習ではモデルがGPUに載るためLoRAで学習し、4ビットで読み込んだときのメモリと出力の違いを発展で比べる。"
+  },
+  {
+    "id": "E3",
+    "category": "exact",
+    "term": "ファインチューニング",
+    "question": "ファインチューニングとは何ですか？",
+    "search_found": true,
+    "search_result": "ファインチューニング: 事前学習済みモデルを、特定のタスクや形式に合ったデータで追加学習させること。出力の形式や口調、特定ドメインの振る舞いを身につけさせるのに向く。最新の事実を覚えさせる用途には、ツールやRAGで外部データを参照させるほうが向くことが多い。"
+  },
+  {
+    "id": "E4",
+    "category": "exact",
+    "term": "ハルシネーション",
+    "question": "ハルシネーションとは何ですか？",
+    "search_found": true,
+    "search_result": "ハルシネーション: LLMが事実と異なる内容や存在しない情報を、もっともらしく生成してしまう現象。モデルが知らないこと（最新情報、組織や講座に固有の情報など）を聞いたときに起きやすい。外部データをツールで参照させる、根拠を示させる、評価で検出する、などで抑える。"
+  },
+  {
+    "id": "E5",
+    "category": "exact",
+    "term": "MCP（Model Context Protocol）",
+    "question": "MCP（Model Context Protocol）とは何ですか？",
+    "search_found": true,
+    "search_result": "MCP（Model Context Protocol）: AIアプリと外部のツールやデータソースをつなぐためのオープンな標準プロトコル。MCPサーバーとして公開したツールは、対応する様々なエージェントやエディタ（MCPクライアント）から共通の方法で使える。第5回で、用語集の検索をMCPサーバーにして体験する。"
+  },
+  {
+    "id": "P1",
+    "category": "paraphrase",
+    "term": "LoRA",
+    "question": "LoRAは、事前学習済みモデルをどのように効率よく追加学習する仕組みですか？",
+    "search_found": true,
+    "search_result": "事前学習: 大量の汎用テキストで、次のトークンを予測するようにモデルを学習させる最初の段階。言語の知識や一般的な常識の多くはここで身につく。\nLoRA: 事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。本講座の第2回演習ではLoRAを扱う。"
+  },
+  {
+    "id": "P2",
+    "category": "paraphrase",
+    "term": "QLoRA",
+    "question": "QLoRAでは、モデルのメモリ使用量を抑えながらどのようにLoRA学習を行いますか？",
+    "search_found": true,
+    "search_result": "LoRA: 事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。本講座の第2回演習ではLoRAを扱う。\nQLoRA: ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。本講座の第2回演習ではモデルがGPUに載るためLoRAで学習し、4ビットで読み込んだときのメモリと出力の違いを発展で比べる。"
+  },
+  {
+    "id": "P3",
+    "category": "paraphrase",
+    "term": "ファインチューニング",
+    "question": "事前学習済みモデルを特定の用途に合わせて調整する方法を説明してください。",
+    "search_found": true,
+    "search_result": "事前学習: 大量の汎用テキストで、次のトークンを予測するようにモデルを学習させる最初の段階。言語の知識や一般的な常識の多くはここで身につく。"
+  },
+  {
+    "id": "P4",
+    "category": "paraphrase",
+    "term": "ハルシネーション",
+    "question": "LLMが事実ではない情報をもっともらしく生成する現象について説明してください。",
+    "search_found": false,
+    "search_result": "検索結果なし"
+  },
+  {
+    "id": "P5",
+    "category": "paraphrase",
+    "term": "MCP（Model Context Protocol）",
+    "question": "AIアプリと外部ツールやデータソースを共通の方法で接続する仕組みについて説明してください。",
+    "search_found": true,
+    "search_result": "外部ツール: Webページの取得、ファイル操作、データベース、他社のAPIなど、エージェントのプログラムの外にある機能をツールとして使うこと。第3回の関数ツールは同じプロセスの中で動くが、外部ツールはプロセスや機械をまたいで呼び出す。MCPはそのための共通の規約。"
+  },
+  {
+    "id": "U1",
+    "category": "unknown",
+    "term": "Knowledge Graph",
+    "question": "Knowledge Graphとは何ですか？",
+    "search_found": false,
+    "search_result": "検索結果なし"
+  },
+  {
+    "id": "U2",
+    "category": "unknown",
+    "term": "Embedding",
+    "question": "Embeddingとは何ですか？",
+    "search_found": false,
+    "search_result": "検索結果なし"
+  },
+  {
+    "id": "U3",
+    "category": "unknown",
+    "term": "ベクトルデータベース",
+    "question": "ベクトルデータベースとは何ですか？",
+    "search_found": false,
+    "search_result": "検索結果なし"
+  },
+  {
+    "id": "U4",
+    "category": "unknown",
+    "term": "Chain-of-Thought",
+    "question": "Chain-of-Thoughtとは何ですか？",
+    "search_found": false,
+    "search_result": "検索結果なし"
+  },
+  {
+    "id": "U5",
+    "category": "unknown",
+    "term": "RLHF",
+    "question": "RLHFとは何ですか？",
+    "search_found": false,
+    "search_result": "検索結果なし"
+  }
+]

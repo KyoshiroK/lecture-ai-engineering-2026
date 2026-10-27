@@ -1,0 +1,122 @@
+[
+  {
+    "id": "E1",
+    "category": "exact",
+    "term": "LoRA",
+    "question": "LoRAとは何ですか？",
+    "answer_after": "事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。本講座の第2回演習ではLoRAを扱う。",
+    "seconds_after": 9.784
+  },
+  {
+    "id": "E2",
+    "category": "exact",
+    "term": "QLoRA",
+    "question": "QLoRAとは何ですか？",
+    "answer_after": "ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。本講座の第2回演習ではモデルがGPUに載るためLoRAで学習し、4ビットで読み込んだときのメモリと出力の違いを発展で比べる。",
+    "seconds_after": 9.866
+  },
+  {
+    "id": "E3",
+    "category": "exact",
+    "term": "ファインチューニング",
+    "question": "ファインチューニングとは何ですか？",
+    "answer_after": "事前学習済みモデルを、特定のタスクや形式に合ったデータで追加学習させること。出力の形式や口調、特定ドメインの振る舞いを身につけさせるのに向く。最新の事実を覚えさせる用途には、ツールやRAGで外部データを参照させるほうが向くことが多い。",
+    "seconds_after": 8.916
+  },
+  {
+    "id": "E4",
+    "category": "exact",
+    "term": "ハルシネーション",
+    "question": "ハルシネーションとは何ですか？",
+    "answer_after": "LLMが事実と異なる内容や存在しない情報を、もっともらしく生成してしまう現象。モデルが知らないこと（最新情報、組織や講座に固有の情報など）を聞いたときに起きやすい。外部データをツールで参照させる、根拠を示させる、評価で検出する、などで抑える。",
+    "seconds_after": 7.652
+  },
+  {
+    "id": "E5",
+    "category": "exact",
+    "term": "MCP（Model Context Protocol）",
+    "question": "MCP（Model Context Protocol）とは何ですか？",
+    "answer_after": "AIアプリと外部のツールやデータソースをつなぐためのオープンな標準プロトコル。MCPサーバーとして公開したツールは、対応する様々なエージェントやエディタ（MCPクライアント）から共通の方法で使える。第5回で、用語集の検索をMCPサーバーにして体験する。",
+    "seconds_after": 9.12
+  },
+  {
+    "id": "P1",
+    "category": "paraphrase",
+    "term": "LoRA",
+    "question": "LoRAは、事前学習済みモデルをどのように効率よく追加学習する仕組みですか？",
+    "answer_after": "固定した低ランクモデル（例：10ビット）を学習するモデル（通常4ビット）。低ランクモデルは精度が落ちやすいが、4ビットで学習したモデルを10ビットにランク上回る精度で扱える。モデルが固定したまま学習し、必要なときにモデルをロードして追加学習する。",
+    "seconds_after": 7.108
+  },
+  {
+    "id": "P2",
+    "category": "paraphrase",
+    "term": "QLoRA",
+    "question": "QLoRAでは、モデルのメモリ使用量を抑えながらどのようにLoRA学習を行いますか？",
+    "answer_after": "固定ビット数（例：4ビットでモデルを読み込む）でメモリを節約し、LoRAのrを大きくする組み合わせ。より大きなrで学習し、小さなrで結果を出力する。本講座の第2回演習ではモデルを4ビットで読み込むためLoRAのrは4ビットの2^nで決める（例：n=30でr=2^30）。",
+    "seconds_after": 11.076
+  },
+  {
+    "id": "P3",
+    "category": "paraphrase",
+    "term": "ファインチューニング",
+    "question": "事前学習済みモデルを特定の用途に合わせて調整する方法を説明してください。",
+    "answer_after": "AIE2026の演習と宿題で、所轄のモデル（LoRA-100、Pi-5、Pi-1）を使い、その先の質問を別のモデル（Gemini-3.5 Flash-1、Claude-4、Abi-1.5）から質問する。質問を返すのがモデルの全パワーを使うための設計。",
+    "seconds_after": 10.995
+  },
+  {
+    "id": "P4",
+    "category": "paraphrase",
+    "term": "ハルシネーション",
+    "question": "LLMが事実ではない情報をもっともらしく生成する現象について説明してください。",
+    "answer_after": "入力に続くトークンを予測することで文章を生成し、出力が事実と異なる内容になる。モデルは「ツール」と同じように、次のトークンを予測する（反覆質問）。",
+    "seconds_after": 2.309
+  },
+  {
+    "id": "P5",
+    "category": "paraphrase",
+    "term": "MCP（Model Context Protocol）",
+    "question": "AIアプリと外部ツールやデータソースを共通の方法で接続する仕組みについて説明してください。",
+    "answer_after": "LLMの呼び出しを共通の方法で受け入れる設計。外部ツールはJSONで、データソースはDBやAPIで、モデルに渡す入力も同じ構造にすることで、どこへツールやデータソースを呼ぶかを決めるのはエージェントが決める。このため、同じツールを同じモデルに渡すことで、同じモデルに渡す入力を同じモデルに渡す。モデルが判断して、どのツールを呼ぶかを決める。",
+    "seconds_after": 5.741
+  },
+  {
+    "id": "U1",
+    "category": "unknown",
+    "term": "Knowledge Graph",
+    "question": "Knowledge Graphとは何ですか？",
+    "answer_after": "モデルが参照するデータベース。グラフのedgeをモデルに渡す、と考える。Pydantic AIでは KnowledgeGraph 型。",
+    "seconds_after": 1.74
+  },
+  {
+    "id": "U2",
+    "category": "unknown",
+    "term": "Embedding",
+    "question": "Embeddingとは何ですか？",
+    "answer_after": "モデルの出力を、特定のフォーマットやデータに合った形で受け取る仕組み。APIで直接出力するのではなく、モデルが望ましくない形式に書き込まれるのを防ぐための中間処理。第5代モデルでAPIで出力するのは旧Embedding。",
+    "seconds_after": 3.229
+  },
+  {
+    "id": "U3",
+    "category": "unknown",
+    "term": "ベクトルデータベース",
+    "question": "ベクトルデータベースとは何ですか？",
+    "answer_after": "NLPでテキストを数値で表し、検索で同じテキストを再度抽出する。Claude Desktop、Cursor、Copilot Chatなどに同じモードで扱える。Apiキーは公開不能。",
+    "seconds_after": 2.507
+  },
+  {
+    "id": "U4",
+    "category": "unknown",
+    "term": "Chain-of-Thought",
+    "question": "Chain-of-Thoughtとは何ですか？",
+    "answer_after": "LLMが解決する最難しいうところの処理を、2つ以上のLLMで分割し、結果は最初のLLMでまとめする手法。出力を予測するのではなく、質問で導き出せる。例：コードを書くとき、モデルが「ツールの名前を付けるコードを1つ返す」然后再モデルがそれを実行する。",
+    "seconds_after": 4.352
+  },
+  {
+    "id": "U5",
+    "category": "unknown",
+    "term": "RLHF",
+    "question": "RLHFとは何ですか？",
+    "answer_after": "事前学習済みのモデルを、エージェントの振る舞い（ツール呼び出し、ファイル操作、チェックなど）を学習する手法の総称。モデルに指示を渡す（LoRA-RLHF）、またはモデルをツールを呼び出すためで、その結果が出力するは学習したエージェント。本講座の第2回演習ではLoRA-RLHFを扱う。",
+    "seconds_after": 4.915
+  }
+]
