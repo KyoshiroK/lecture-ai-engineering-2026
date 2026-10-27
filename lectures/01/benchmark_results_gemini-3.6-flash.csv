@@ -1,0 +1,10 @@
+﻿model,question,trial,response_time_sec,input_tokens,output_tokens,total_tokens,status
+gemini-3.6-flash,LoRAとは何ですか？一文で説明してください。,1,5.242,13,55,659,OK
+gemini-3.6-flash,LoRAとは何ですか？一文で説明してください。,2,,,,,API_ERROR_503
+gemini-3.6-flash,LoRAとは何ですか？一文で説明してください。,3,3.213,13,54,698,OK
+gemini-3.6-flash,LoRAとは何ですか？初心者向けに説明してください。,1,,,,,API_ERROR_503
+gemini-3.6-flash,LoRAとは何ですか？初心者向けに説明してください。,2,,,,,API_ERROR_503
+gemini-3.6-flash,LoRAとは何ですか？初心者向けに説明してください。,3,12.638,13,863,1881,OK
+gemini-3.6-flash,LoRAの仕組み、メリット、デメリット、利用例を詳しく説明してください。,1,,,,,API_ERROR_429
+gemini-3.6-flash,LoRAの仕組み、メリット、デメリット、利用例を詳しく説明してください。,2,,,,,API_ERROR_429
+gemini-3.6-flash,LoRAの仕組み、メリット、デメリット、利用例を詳しく説明してください。,3,,,,,API_ERROR_429

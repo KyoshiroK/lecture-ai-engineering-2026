@@ -1,0 +1,10 @@
+﻿model,question,trial,response_time_sec,input_tokens,output_tokens,total_tokens,status
+gemini-3.1-flash-lite,LoRAとは何ですか？一文で説明してください。,1,1.683,13,54,67,OK
+gemini-3.1-flash-lite,LoRAとは何ですか？一文で説明してください。,2,1.532,13,40,53,OK
+gemini-3.1-flash-lite,LoRAとは何ですか？一文で説明してください。,3,6.247,13,54,67,OK
+gemini-3.1-flash-lite,LoRAとは何ですか？初心者向けに説明してください。,1,5.041,13,670,683,OK
+gemini-3.1-flash-lite,LoRAとは何ですか？初心者向けに説明してください。,2,3.455,13,708,721,OK
+gemini-3.1-flash-lite,LoRAとは何ですか？初心者向けに説明してください。,3,3.022,13,668,681,OK
+gemini-3.1-flash-lite,LoRAの仕組み、メリット、デメリット、利用例を詳しく説明してください。,1,4.175,17,906,923,OK
+gemini-3.1-flash-lite,LoRAの仕組み、メリット、デメリット、利用例を詳しく説明してください。,2,4.258,17,1013,1030,OK
+gemini-3.1-flash-lite,LoRAの仕組み、メリット、デメリット、利用例を詳しく説明してください。,3,7.778,17,977,994,OK
