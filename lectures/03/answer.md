@@ -112,7 +112,113 @@
 
 ## 宿題
 
-- 取り組んだレベル：基礎 / 実装 / 発展
-- やったこと：
-- 結果：
-- 気づき・疑問：
+# 1. 取り組んだレベル
+    **発展（a）：Google ADKによるエージェントの再構築**
+
+# 2. 目的
+    第3回演習で作成したPydantic AIベースの学習支援エージェントをGoogle ADKで再構築し、エージェントの実装方法および回答の違いを比較する。
+
+# 3. 実施内容
+    既存の `app/agent.py` に定義された `INSTRUCTIONS` と、`app/tools.py` に実装された以下の3つのツールを再利用した。
+    - `search_glossary`：講座の用語を検索する。
+    - `get_lecture_summary`：指定した講義回の要点を取得する。
+    - `make_quiz`：指定した講義回の用語から確認問題を作成する。
+
+    `adk_agent/glossary_agent/agent.py` および `__init__.py` を新規作成し、Google ADKの `Agent` を使用してエージェントを構築した。
+
+    起動には以下のコマンドを使用した。
+    ```
+    bash
+    PYTHONPATH=. uv run --with google-adk \
+    adk run adk_agent/glossary_agent
+    ```
+    ADKの初回起動時にテレメトリーの確認が表示されたため、`n` を選択した。
+    その後、`Running agent glossary_agent` と表示され、対話形式で質問できることを確認した。
+
+# 4. Pydantic AI版とGoogle ADK版の比較
+    両方のエージェントに同じ質問を入力して比較した。
+
+    | 質問 | Pydantic AI版 | Google ADK版 |
+    |---|---|---|
+    | LoRAとQLoRAの違いは？ | LoRAは低ランク行列を学習し、QLoRAはベースモデルを量子化する手法と説明 | 同様の内容を説明 |
+    | 第2回の内容から確認問題を1問出して | 「ファインチューニング」の意味を問う問題を生成 | 「QLoRA」の特徴を問う問題を生成 |
+    | 宿題の「3レベル」とは？ | 基礎・実装・発展の3レベルを説明 | 同じ3レベルを説明 |
+
+    いずれのエージェントも、3つの質問に対して適切な回答を生成できた。
+    確認問題の内容は異なったが、用語をランダムに選択する実装のため、フレームワークの違いが直接の原因とは断定できない。
+
+# 5. 実装方法の比較
+    **Pydantic AI**
+    - `Agent` でエージェントを構築する。
+    - `agent.tool_plain` によってツールを登録する。
+    - `INSTRUCTIONS` にエージェントの動作指示を定義する。
+    - `--trace` により、ツール呼び出しと戻り値を確認できた。
+
+    **Google ADK**
+    - `google.adk.agents.Agent` でエージェントを構築する。
+    - `Agent` の `tools` 引数に関数のリストを渡して登録する。
+    - `instruction` 引数に既存の `INSTRUCTIONS` を渡す。
+    - `adk run` により対話形式でエージェントを実行できた。
+
+    今回の実験では、既存のツール関数や指示文を変更することなく、エージェントの構築部分を別のフレームワークに置き換えることができた。
+
+# 6. 実験結果と考察
+    Pydantic AI版とGoogle ADK版の両方で、講座固有の用語の説明、複数用語の比較、確認問題の生成を実行できた。
+    両者の主な違いは、エージェントの構築方法とツールの登録方法にある。
+    特に、Pydantic AIではツール登録メソッドを使用するのに対し、Google ADKではエージェント作成時にツールをリストで渡す点が異なっていた。
+    一方、どちらも既存のPython関数をツールとして利用できるため、機能を再利用しやすいと感じた。
+    なお、Google ADK版の今回のCLI出力では個々のツール呼び出しを直接確認していないため、ツール選択の詳細については追加検証が必要である。
+
+# 7. 気づき・疑問
+    今回の発展課題を通じて、エージェントの機能とフレームワーク固有の実装を分離する重要性を理解した。
+    同じ指示文とツールを使用しても、LLMの回答表現や出題内容には違いが生じることが分かった。
+    今後は、同じ質問を複数回実行し、ツール呼び出し回数、トークン使用量、回答の再現性などを比較することで、各フレームワークの特徴をより定量的に評価したい。
+
+# 8. 実際のターミナルのLog
+    @KyoshiroK ➜ /workspaces/lecture-ai-engineering-2026 (lec03) $ mkdir -p adk_agent/glossary_agent
+    @KyoshiroK ➜ /workspaces/lecture-ai-engineering-2026 (lec03) $ touch adk_agent/glossary_agent/__init__.py
+    @KyoshiroK ➜ /workspaces/lecture-ai-engineering-2026 (lec03) $ touch adk_agent/glossary_agent/agent.py
+    @KyoshiroK ➜ /workspaces/lecture-ai-engineering-2026 (lec03) $ PYTHONPATH=. uv run --with google-adk \
+    adk run adk_agent/glossary_agent
+    Installed 48 packages in 5.18s
+    Help improve the ADK (CLI and Web UI) by allowing Google to collect pseudonymized usage data?
+
+    What is collected: Names of subcommands and flags (no user-provided values or arguments), execution metrics (duration, exit state), environment specs (OS, Python version), and aggregated Web UI feature interactions. No personally identifiable information (PII) is collected.
+
+    This is OFF by default. You can opt out at any time using the 'adk telemetry disable' command or Web UI user settings.
+
+    Enable telemetry? [Y/n]: n
+    Log setup complete: /tmp/agents_log/agent.20261103_112938.log
+    To access latest log: tail -F /tmp/agents_log/agent.latest.log
+    /home/vscode/.cache/uv/archive-v0/1Zhb-_Be0oYStebI/lib/python3.12/site-packages/google/adk/cli/cli.py:351: UserWarning: [EXPERIMENTAL] InMemoryCredentialService: This feature is experimental and may change or be removed in future versions without notice. It may introduce breaking changes at any time.
+    credential_service = InMemoryCredentialService()
+    /home/vscode/.cache/uv/archive-v0/1Zhb-_Be0oYStebI/lib/python3.12/site-packages/google/adk/auth/credential_service/in_memory_credential_service.py:33: UserWarning: [EXPERIMENTAL] BaseCredentialService: This feature is experimental and may change or be removed in future versions without notice. It may introduce breaking changes at any time.
+    super().__init__()
+    Running agent glossary_agent, type exit to exit.
+    [user]: LoRAとQLoRAの違いは？
+    [glossary_agent]: LoRAとQLoRAの違いは、ベースモデルの重みをそのまま扱うか、量子化して扱うかにあります。
+
+    * **LoRA**: 事前学習済みの重みを固定したまま、重みの更新分を小さな低ランク行列（2つの小さな行列の積）で表し、その部分だけを効率的に学習するPEFT（Parameter-Efficient Fine-Tuning）手法です。学習パラメータや保存ファイルを大幅に削減できます。
+    * **QLoRA**: LoRAの仕組みをベースにしつつ、**ベースモデルの重みを4ビットなどに量子化してメモリを大幅に節約した状態**で学習を行う手法です。これにより、より大きなモデルを比較的小さなGPUでも扱えるようになります。
+
+    関係する回：第2回
+    [user]: 第2回の内容から確認問題を1問出して
+    [glossary_agent]: それでは、第2回の内容から確認問題を出します。
+
+    **【確認問題】**
+    「QLoRA」とは、どのような特徴を持つ手法ですか？（LoRAとの違いに触れて説明してください）
+
+    関係する回：第2回
+    [user]: AIE2026の講座の宿題にある「3レベル」とは何ですか？
+    [glossary_agent]: 用語集を確認したところ、「宿題の3レベル」は以下のように定義されています。
+
+    AIE2026の宿題は、以下の3段階（レベル）で構成されています。
+
+    1. **基礎**：講義内容の確認
+    2. **実装**：自分でコードを書く
+    3. **発展**：調査や試行を行う
+
+    どれか1つのレベルに取り組めば、その回の宿題は完了となります（原則として採点は行われません）。
+
+    関係する回：第1回
+    [user]: exit
