@@ -5,6 +5,7 @@
 """
 
 import json
+import random
 from functools import cache
 from pathlib import Path
 
@@ -77,3 +78,45 @@ def get_lecture_summary(lecture: int) -> str:
         available = sorted(p.stem for p in (DATA_DIR / "lectures").glob("*.md"))
         return f"第{lecture}回の要点はまだありません。用意されている回: {', '.join(available)}"
     return path.read_text(encoding="utf-8")
+
+
+def make_quiz(lecture: int) -> str:
+    """指定した回の用語から1つを選び、確認問題と答えを返す。
+
+    「第2回の確認問題を出して」のように、
+    指定した講義回の復習問題を求められたときに使う。
+
+    Args:
+        lecture: 講義回の番号（例：2）
+
+    Returns:
+        確認問題と答えを含むJSON文字列
+    """
+    glossary = load_glossary()
+
+    # 指定した講義回に該当する用語を抽出
+    terms = [
+        item for item in glossary
+        if item.get("lecture") == lecture
+    ]
+
+    # 該当する用語がない場合
+    if not terms:
+        return json.dumps(
+            {
+                "question": "",
+                "answer": f"第{lecture}回の用語が見つかりませんでした。"
+            },
+            ensure_ascii=False
+        )
+
+    # 用語をランダムに1つ選ぶ
+    selected = random.choice(terms)
+
+    # 確認問題を作成
+    result = {
+        "question": f"「{selected['term']}」の意味は？",
+        "answer": selected["definition"]
+    }
+
+    return json.dumps(result, ensure_ascii=False)
